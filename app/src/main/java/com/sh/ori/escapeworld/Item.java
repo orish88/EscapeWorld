@@ -9,7 +9,7 @@ public class Item {
     private int id;
     private String name;
     private String description;
-    private Item itemReward;
+    private int itemRewardId;
     private Place placeReward;
     private String txtReward;
     private Item reactItem;
@@ -21,17 +21,17 @@ public class Item {
      * @param id id
      * @param name name
      * @param description description
-     * @param itemReward itemReward
+     * @param itemRewardId itemReward
      * @param placeReward placeReward
      * @param txtReward txtReward
      * @param reactItem reactItem
      */
-    public Item(int id, String name, String description, Item itemReward,
+    public Item(int id, String name, String description, int itemRewardId,
                 Place placeReward, String txtReward, Item reactItem) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.itemReward = itemReward;
+        this.itemRewardId = itemRewardId;
         this.placeReward = placeReward;
         this.txtReward = txtReward;
         this.reactItem = reactItem;
@@ -79,8 +79,8 @@ public class Item {
         return this.id == item.id;
     }
 
-    public Item getItemReward(){
-        return itemReward;
+    public int getItemRewardId(){
+        return itemRewardId;
     }
 
     public Place getPlaceReward(){

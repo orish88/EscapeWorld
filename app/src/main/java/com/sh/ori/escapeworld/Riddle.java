@@ -10,7 +10,7 @@ public class Riddle {
     private String name;
     private String description;
     private Item itemReward;
-    private Place placeReward;
+    private int placeRewardId;
     private String txtReward;
     private String answer;
     private boolean answered;
@@ -21,17 +21,17 @@ public class Riddle {
      * @param name The name of the riddle
      * @param description a description of the riddle
      * @param itemReward the item given upon answering riddle
-     * @param placeReward the place given upon answering riddle
+     * @param placeRewardId the place given upon answering riddle
      * @param txtReward the text written upon answering riddle
      * @param answer the answer to the riddle
      */
     public Riddle(int id, String name, String description, Item itemReward,
-                  Place placeReward, String txtReward, String answer) {
+                  int placeRewardId, String txtReward, String answer) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.itemReward = itemReward;
-        this.placeReward = placeReward;
+        this.placeRewardId = placeRewardId;
         this.txtReward = txtReward;
         this.answer = answer;
         this.answered = false;
@@ -52,14 +52,15 @@ public class Riddle {
         this.answer = answer;
         this.answered = false;
         this.txtReward = txtReward;
+        this.placeRewardId = -1;
     }
 
     public void setItemReward(Item itemReward) {
         this.itemReward = itemReward;
     }
 
-    public void setPlaceReward(Place placeReward) {
-        this.placeReward = placeReward;
+    public void setPlaceReward(int placeRewardId) {
+        this.placeRewardId = placeRewardId;
     }
 
     public void setTxtReward(String txtReward) {
@@ -92,8 +93,8 @@ public class Riddle {
         return this.answered;
     }
 
-    public Place getPlaceReward(){
-        return placeReward;
+    public int getPlaceReward(){
+        return placeRewardId;
     }
 
     public Item getItemReward(){

@@ -2,18 +2,23 @@ package com.sh.ori.escapeworld;
 
 
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 
 /**
  * An example of how to use the game
  */
 public class main {
     public static void main(String[] argv){
-
     }
 
     Quest setUp(){
+        //It is important that the id is the location in the ArrayList
+        LatLng ll = new LatLng(12, 14);
         Riddle riddle0 = new Riddle(0, "Riddle 0", "What Has Four Legs and Flies?",
                 "A horse", "Congratulations");
         Riddle riddle1 = new Riddle(1, "Riddle 1", "What brand are the cookies?",
@@ -27,16 +32,23 @@ public class main {
         Item chest = new Item(1, "chest", "A chest", coin, null,
                 "take a coin and go to the beach", null);
         Place Start = new Place(0, "Start", "Go to the IDC"
-                , "Go to the Entrepreneurship Building", riddle0, chest, 15.32);
+                , "Go to the Entrepreneurship Building", riddle0, chest, ll);
         Place IDC = new Place(1, "IDC", "Look for the cookies. "
-                , null, riddle1, chest, 12.71);
-        riddle1.setPlaceReward(IDC);
+                , null, riddle1, chest, ll);
+        riddle1.setPlaceReward(IDC.getId());
         Place Beach = new Place(2, "Beach", "A nice place to swim and get a tan", "Go to the train",
-                null, null, 82.9);
+                null, null, ll);
         chest.setPlaceReward(Beach);
-        Place end = new Place(3, "end", "Congratulations, you won", null, null, null, 53.91);
-        Place[] places = {Start, IDC, Beach, end};
-        Item[] items = {chest, key, coin};
+        Place end = new Place(3, "end", "Congratulations, you won", null, null, null, ll);
+        ArrayList<Place> places = new ArrayList<>();
+        places.add(Start);
+        places.add(IDC);
+        places.add(Beach);
+        places.add(end);
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(chest);
+        items.add(key);
+        items.add(coin);
         Quest quest = new Quest(0, "Lets have fun", "Play the hack IDC game", places, items);
         return quest;
     }
@@ -45,7 +57,7 @@ public class main {
 
     }
 
-    boolean answerRiddle(Riddle riddle, String answer){
+    boolean answerRiddle(Riddle riddle, String answer, ArrayList<Place> places){
         if(riddle.tryAnswer(answer))
         {
             System.out.println(riddle.getTxtReward());
@@ -53,9 +65,9 @@ public class main {
                 System.out.println("You got a " + riddle.getItemReward());
                 riddle.getItemReward().revealItem();
             }
-            if(riddle.getPlaceReward() != null){
+            if(riddle.getPlaceReward() != -1){
                 System.out.println("You can go to " + riddle.getPlaceReward());
-                riddle.getPlaceReward().revealLoc();
+                places.get(riddle.getPlaceReward()).revealLoc();
             }
             return true;
         }
@@ -79,7 +91,7 @@ public class main {
         return false;
     }
 
-    void goToPlace(Place place, Item[] items){
+    void goToPlace(Place place, ArrayList<Item> items, ArrayList<Place> places){
         Scanner reader = new Scanner(System.in);
         System.out.println(place.getEnterDescriptionescription());
         String input;
@@ -115,7 +127,7 @@ public class main {
             System.out.println("You got a ");
             input = reader.nextLine();
             while (true){
-                if(answerRiddle(place.getRiddle(), input)){
+                if(answerRiddle(place.getRiddle(), input, places)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {
@@ -128,7 +140,7 @@ public class main {
             System.out.println("Would you like to answer the riddle, y/n?");
             input = reader.nextLine();
             while (input.equals("y")){
-                if(answerRiddle(place.getRiddle(), input)){
+                if(answerRiddle(place.getRiddle(), input, places)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {
@@ -141,10 +153,10 @@ public class main {
 
     }
 
-    Item findItem(String name, Item[] items){
-        for(int i = 0;i<items.length;i++){
-            if(items[i].getName().equals(name)){
-                return items[i];
+    Item findItem(String name, ArrayList<Item> items){
+        for(int i = 0;i<items.size(); i++){
+            if(items.get(i).getName().equals(name)){
+                return items.get(i);
             }
         }
         return null;

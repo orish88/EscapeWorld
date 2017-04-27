@@ -1,6 +1,8 @@
 package com.sh.ori.escapeworld;
 
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * A place on the map. Every place has a riddle and an item.
  */
@@ -9,20 +11,20 @@ public class Place {
     private String name;
     private String enterDescription;
     private String exitDescription;
-    private Riddle riddle;
-    private Item item;
+    private int riddleId;
+    private int itemId;
     private boolean revealed;
-    private double location;
+    private LatLng location;
 
 
     public Place(int id, String name, String enterDescription, String exitDescription,
-                 Riddle riddle, Item item, double location) {
+                 int riddleId, int itemId, LatLng location) {
         this.id = id;
         this.name = name;
         this.enterDescription = enterDescription;
         this.exitDescription = exitDescription;
-        this.riddle = riddle;
-        this.item = item;
+        this.riddleId = riddleId;
+        this.itemId = itemId;
         this.revealed = false;
         this.location = location;
 
@@ -32,7 +34,7 @@ public class Place {
         return this.revealed;
     }
 
-    public double getLocation(){
+    public LatLng getLocation(){
         return this.location;
     }
 
@@ -56,12 +58,12 @@ public class Place {
         return exitDescription;
     }
 
-    public Riddle getRiddle() {
-        return riddle;
+    public int getRiddleId() {
+        return riddleId;
     }
 
-    public Item getItem() {
-        return item;
+    public int getItem() {
+        return itemId;
     }
 
 }
