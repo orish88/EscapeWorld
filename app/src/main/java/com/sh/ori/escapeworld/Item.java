@@ -14,6 +14,7 @@ public class Item {
     private String txtReward;
     private Item reactItem;
     private boolean revealed;
+    private boolean passive;
 
     /**
      * Constructor for passive item. (Like a chest)
@@ -35,6 +36,7 @@ public class Item {
         this.txtReward = txtReward;
         this.reactItem = reactItem;
         this.revealed = false;
+        this.passive = true;
     }
 
     /**
@@ -48,15 +50,20 @@ public class Item {
         this.name = name;
         this.description = description;
         this.revealed = false;
+        this.passive = false;
     }
 
 
-    private void revealItem(){
+    public void revealItem(){
         this.revealed = true;
     }
 
-    private boolean isRevealed(){
+    public boolean isRevealed(){
         return this.revealed;
+    }
+
+    public boolean isPassive(){
+        return this.passive;
     }
 
     /**
