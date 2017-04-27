@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    tools:context="com.sh.ori.escapeworld.StatusGames">
+
+    <Button
+        android:id="@+id/bt_privateGame"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="#888888"
+        android:background="@drawable/mybutton"
+        android:text="Private Game"
+        android:layout_gravity="center"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="192dp" />
+
+    <Button
+        android:id="@+id/bt_publicGame"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="#888888"
+        android:background="@drawable/mybutton"
+        android:text="Public Game"
+        android:layout_gravity="center"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="280dp" />
+
+    <TextView
+        android:id="@+id/tv_title_statusGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:text="Choose Game Status"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="125dp" />
+
+</android.support.constraint.ConstraintLayout>

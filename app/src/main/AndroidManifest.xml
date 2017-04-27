@@ -17,7 +17,9 @@
         </activity>
         <activity android:name=".FindQuestActivity" />
         <activity android:name=".loginActivity" />
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".StatusGames" />
+        <activity android:name=".questXml"></activity>
     </application>
 
 </manifest>
