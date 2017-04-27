@@ -3,30 +3,36 @@ package com.sh.ori.escapeworld;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
-public class StartMenuActivity extends AppCompatActivity {
+public class StartMenuActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Button btFindQuest;
+    Button btCreateQuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_menu);
         Log.d("notes","startMenu on create called");
-        ArrayList<Item> inv = new ArrayList<Item>();
-        ArrayList<Box> boxes = new ArrayList<Box>();
-        Riddle r = new Riddle("","","");
-        if(r.checkAnswer(""))
-        {
-            inv.addAll(inv.size(),r.getItemList());
-
-        }
+        btFindQuest = (Button) findViewById(R.id.bt_find_quest);
+        btCreateQuest = (Button) findViewById(R.id.bt_create_quest);
 
     }
-    private String getNameFromClassName(String className){
-        String[] spl = className.split("\\.");
-        return spl[spl.length-1];
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case(R.id.bt_find_quest):
+//                startActivityForResult();
+                break;
+            case(R.id.bt_create_quest):
+//                startActivityForResult();
+                break;
+        }
     }
 }
