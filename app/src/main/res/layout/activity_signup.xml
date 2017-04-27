@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sh.ori.escapeworld.Register">
+    android:background="@mipmap/ic_launcher"
+    tools:context="com.sh.ori.escapeworld.SignupActivity">
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/mybutton"
         android:text="Button"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="405dp" />
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="395dp" />
 </android.support.constraint.ConstraintLayout>
