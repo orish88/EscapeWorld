@@ -10,7 +10,7 @@ public class Item {
     private String name;
     private String description;
     private int itemRewardId;
-    private Place placeReward;
+    private int placeRewardId;
     private String txtReward;
     private Item reactItem;
     private boolean revealed;
@@ -22,17 +22,17 @@ public class Item {
      * @param name name
      * @param description description
      * @param itemRewardId itemReward
-     * @param placeReward placeReward
+     * @param placeRewardId placeReward
      * @param txtReward txtReward
      * @param reactItem reactItem
      */
     public Item(int id, String name, String description, int itemRewardId,
-                Place placeReward, String txtReward, Item reactItem) {
+                int placeRewardId, String txtReward, Item reactItem) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.itemRewardId = itemRewardId;
-        this.placeReward = placeReward;
+        this.placeRewardId = placeRewardId;
         this.txtReward = txtReward;
         this.reactItem = reactItem;
         this.revealed = false;
@@ -83,12 +83,12 @@ public class Item {
         return itemRewardId;
     }
 
-    public Place getPlaceReward(){
-        return placeReward;
+    public int getPlaceRewardId(){
+        return placeRewardId;
     }
 
-    public void setPlaceReward(Place place){
-        this.placeReward = place;
+    public void setPlaceRewardId(int placeId){
+        this.placeRewardId = placeId;
     }
 
     public String getTxtReward(){

@@ -29,17 +29,17 @@ public class main {
         riddle1.setItemReward(key);
         Item coin = new Item(2, "coin", "A coin");
         riddle2.setItemReward(coin);
-        Item chest = new Item(1, "chest", "A chest", coin, null,
+        Item chest = new Item(1, "chest", "A chest", coin.getId(), null,
                 "take a coin and go to the beach", null);
         Place Start = new Place(0, "Start", "Go to the IDC"
-                , "Go to the Entrepreneurship Building", riddle0, chest, ll);
+                , "Go to the Entrepreneurship Building", riddle0.getId(), chest.getId(), ll);
         Place IDC = new Place(1, "IDC", "Look for the cookies. "
-                , null, riddle1, chest, ll);
+                , null, riddle1.getId(), chest.getId(), ll);
         riddle1.setPlaceReward(IDC.getId());
         Place Beach = new Place(2, "Beach", "A nice place to swim and get a tan", "Go to the train",
-                null, null, ll);
+                -1, -1, ll);
         chest.setPlaceReward(Beach);
-        Place end = new Place(3, "end", "Congratulations, you won", null, null, null, ll);
+        Place end = new Place(3, "end", "Congratulations, you won", null, -1, -1, ll);
         ArrayList<Place> places = new ArrayList<>();
         places.add(Start);
         places.add(IDC);
@@ -75,12 +75,12 @@ public class main {
         return false;
     }
 
-    boolean useItem(Item active, Item passive){
+    boolean useItem(Item active, Item passive, ArrayList<Item> items){
         if(passive.getInteration(active)){
             System.out.println(passive.getTxtReward());
-            if(passive.getItemReward() != null){
-                System.out.println("You got a " + passive.getItemReward());
-                passive.getItemReward().revealItem();
+            if(passive.getItemRewardId() != -1){
+                System.out.println("You got a " + items.get(passive.getItemRewardId()).getName());
+                items.get(passive.getItemRewardId()).revealItem();
             }
             if(passive.getPlaceReward() != null){
                 System.out.println("You can go to " + passive.getPlaceReward());
@@ -95,10 +95,10 @@ public class main {
         Scanner reader = new Scanner(System.in);
         System.out.println(place.getEnterDescriptionescription());
         String input;
-        if(place.getItem() != null){
-            if(place.getItem().isPassive()){
-                Item passive = place.getItem();
-                System.out.println("You see a " + place.getItem().getName());
+        if(place.getItemId() != -1){
+            if(items.get(place.getItemId()).isPassive()){
+                Item passive = items.get(place.getItemId());
+                System.out.println("You see a " + items.get(place.getItemId()).getName());
                 System.out.println("Would you like to use an item on it, y/n?");
                 input = reader.nextLine();
                 while(input.equals("y")){
@@ -108,13 +108,14 @@ public class main {
                     if(active != null){
                         if(passive.getInteration(active)){
                             System.out.println(passive.getTxtReward());
-                            if(passive.getItemReward() != null){
-                                System.out.println("You got a " + passive.getItemReward());
-                                passive.getItemReward().revealItem();
+                            if(items.get(passive.getId()).getItemRewardId() != -1){
+                                System.out.println("You got a " +
+                                        items.get(passive.getItemRewardId()).getName());
+                                items.get(passive.getItemRewardId()).revealItem();
                             }
-                            if(passive.getPlaceReward() != null){
-                                System.out.println("Go to " + passive.getPlaceReward());
-                                passive.getPlaceReward().revealLoc();
+                            if(items.get(passive.getId()).getPlaceRewardId() != -1){
+                                System.out.println("Go to " + items.get(passive.getPlaceRewardId()).getName());
+                                items.get(passive.getPlaceRewardId()).revealLoc();
                             }
                         }
                         break;
@@ -161,5 +162,7 @@ public class main {
         }
         return null;
     }
+
+
 
 }

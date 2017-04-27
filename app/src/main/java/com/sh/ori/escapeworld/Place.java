@@ -62,7 +62,7 @@ public class Place {
         return riddleId;
     }
 
-    public int getItem() {
+    public int getItemId() {
         return itemId;
     }
 
