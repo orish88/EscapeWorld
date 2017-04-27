@@ -17,7 +17,10 @@ public class main {
 
     Quest setUp(){
         //It is important that the id is the location in the ArrayList
-        LatLng ll = new LatLng(12, 14);
+        LatLng ll0 = new LatLng(32.175, 34.835);
+        LatLng ll1 = new LatLng(32.176, 34.836);
+        LatLng ll2 = new LatLng(32.18, 34.803);
+        LatLng ll3 = new LatLng(32.164, 34.82);
         Riddle riddle0 = new Riddle(0, "Riddle 0", "What Has Four Legs and Flies?",
                 "A horse", "Congratulations");
         Riddle riddle1 = new Riddle(1, "Riddle 1", "What brand are the cookies?",
@@ -31,14 +34,14 @@ public class main {
         Item chest = new Item(1, "chest", "A chest", coin.getId(), -1,
                 "take a coin and go to the beach", -1);
         Place Start = new Place(0, "Start", "Go to the IDC"
-                , "Go to the Entrepreneurship Building", riddle0.getId(), chest.getId(), ll);
+                , "Go to the Entrepreneurship Building", riddle0.getId(), chest.getId(), ll0);
         Place IDC = new Place(1, "IDC", "Look for the cookies. "
-                , null, riddle1.getId(), chest.getId(), ll);
+                , null, riddle1.getId(), chest.getId(), ll1);
         riddle1.setPlaceReward(IDC.getId());
         Place Beach = new Place(2, "Beach", "A nice place to swim and get a tan", "Go to the train",
-                -1, -1, ll);
+                -1, -1, ll2);
         chest.setPlaceRewardId(Beach.getId());
-        Place end = new Place(3, "end", "Congratulations, you won", null, -1, -1, ll);
+        Place end = new Place(3, "end", "Congratulations, you won", null, -1, -1, ll3);
         ArrayList<Place> places = new ArrayList<>();
         places.add(Start);
         places.add(IDC);
