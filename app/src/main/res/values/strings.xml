@@ -2,5 +2,6 @@
     <string name="app_name">EscapeWorld</string>
     <string name="find_quest">Find a quest!</string>
     <string name="create_quest">Quest Editor</string>
+    <string name="title_activity_quest_find">Map</string>
 
 </resources>

@@ -1,12 +1,11 @@
 package com.sh.ori.escapeworld;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.ArrayList;
 
 public class StartMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,7 +19,8 @@ public class StartMenuActivity extends AppCompatActivity implements View.OnClick
         Log.d("notes","startMenu on create called");
         btFindQuest = (Button) findViewById(R.id.bt_find_quest);
         btCreateQuest = (Button) findViewById(R.id.bt_create_quest);
-
+        btFindQuest.setOnClickListener(this);
+        btCreateQuest.setOnClickListener(this);
     }
 
 
@@ -29,6 +29,8 @@ public class StartMenuActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
             case(R.id.bt_find_quest):
 //                startActivityForResult();
+                Log.d("notes","pressed findRequest");
+                startActivity(new Intent(getApplicationContext(),FindQuestActivity.class));
                 break;
             case(R.id.bt_create_quest):
 //                startActivityForResult();

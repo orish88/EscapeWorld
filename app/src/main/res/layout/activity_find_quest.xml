@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_find_quest"
     android:layout_width="match_parent"
@@ -8,12 +9,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sh.ori.escapeworld.FindQuestActivity"
+    tools:context="com.sh.ori.escapeworld.CreateQuestActivity"
+    android:orientation="vertical"
     android:weightSum="1">
 
-    <com.google.android.gms.maps.MapView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:id="@+id/mapView2"
-        android:layout_weight="0.90" />
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="374dp"
+        tools:context="com.sh.ori.escapeworld.FindQuestActivity" />
+    <TextView
+        android:layout_width="378dp"
+        android:layout_height="wrap_content"
+        android:text="sdfsf"
+        android:layout_weight="1.04" />
+
 </LinearLayout>
