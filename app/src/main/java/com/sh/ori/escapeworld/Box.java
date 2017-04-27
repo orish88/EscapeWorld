@@ -8,5 +8,6 @@ public class Box {
     public Box()
     {
         System.out.println("hi");
+        System.out.println("by");
     }
 }
