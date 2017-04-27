@@ -29,7 +29,7 @@ public class main {
         riddle1.setItemReward(key);
         Item coin = new Item(2, "coin", "A coin");
         riddle2.setItemReward(coin);
-        Item chest = new Item(1, "chest", "A chest", coin.getId(), null,
+        Item chest = new Item(1, "chest", "A chest", coin.getId(), -1,
                 "take a coin and go to the beach", null);
         Place Start = new Place(0, "Start", "Go to the IDC"
                 , "Go to the Entrepreneurship Building", riddle0.getId(), chest.getId(), ll);
@@ -38,7 +38,7 @@ public class main {
         riddle1.setPlaceReward(IDC.getId());
         Place Beach = new Place(2, "Beach", "A nice place to swim and get a tan", "Go to the train",
                 -1, -1, ll);
-        chest.setPlaceReward(Beach);
+        chest.setPlaceRewardId(Beach.getId());
         Place end = new Place(3, "end", "Congratulations, you won", null, -1, -1, ll);
         ArrayList<Place> places = new ArrayList<>();
         places.add(Start);
@@ -75,23 +75,23 @@ public class main {
         return false;
     }
 
-    boolean useItem(Item active, Item passive, ArrayList<Item> items){
+    boolean useItem(Item active, Item passive, ArrayList<Item> items, ArrayList<Place> places){
         if(passive.getInteration(active)){
             System.out.println(passive.getTxtReward());
             if(passive.getItemRewardId() != -1){
                 System.out.println("You got a " + items.get(passive.getItemRewardId()).getName());
                 items.get(passive.getItemRewardId()).revealItem();
             }
-            if(passive.getPlaceReward() != null){
-                System.out.println("You can go to " + passive.getPlaceReward());
-                passive.getPlaceReward().revealLoc();
+            if(passive.getPlaceRewardId() != -1){
+                System.out.println("You can go to " + places.get(passive.getPlaceRewardId()).getName());
+                places.get(passive.getPlaceRewardId()).revealLoc();
             }
             return true;
         }
         return false;
     }
 
-    void goToPlace(Place place, ArrayList<Item> items, ArrayList<Place> places){
+    void goToPlace(Place place, ArrayList<Item> items, ArrayList<Place> places, ArrayList<Riddle> riddles){
         Scanner reader = new Scanner(System.in);
         System.out.println(place.getEnterDescriptionescription());
         String input;
@@ -115,7 +115,7 @@ public class main {
                             }
                             if(items.get(passive.getId()).getPlaceRewardId() != -1){
                                 System.out.println("Go to " + items.get(passive.getPlaceRewardId()).getName());
-                                items.get(passive.getPlaceRewardId()).revealLoc();
+                                places.get(passive.getPlaceRewardId()).revealLoc();
                             }
                         }
                         break;
@@ -128,7 +128,7 @@ public class main {
             System.out.println("You got a ");
             input = reader.nextLine();
             while (true){
-                if(answerRiddle(place.getRiddle(), input, places)){
+                if(answerRiddle(riddles.get(place.getRiddleId()), input, places)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {
@@ -137,11 +137,11 @@ public class main {
             }
         }
 
-        if(place.getRiddle() != null){
+        if(place.getRiddleId() != -1){
             System.out.println("Would you like to answer the riddle, y/n?");
             input = reader.nextLine();
             while (input.equals("y")){
-                if(answerRiddle(place.getRiddle(), input, places)){
+                if(answerRiddle(riddles.get(place.getRiddleId()), input, places)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {
