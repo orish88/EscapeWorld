@@ -5,7 +5,6 @@ package com.sh.ori.escapeworld;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -26,11 +25,11 @@ public class main {
         Riddle riddle2 = new Riddle(2, "Riddle 2", "What color is the arch in the arch bridge? Blue, " +
                 "Yellow, white, or all?", "all", "Congratulations");
         Item key = new Item(0, "key", "A key");
-        riddle1.setItemReward(key);
+        riddle1.setItemReward(key.getId());
         Item coin = new Item(2, "coin", "A coin");
-        riddle2.setItemReward(coin);
+        riddle2.setItemReward(coin.getId());
         Item chest = new Item(1, "chest", "A chest", coin.getId(), -1,
-                "take a coin and go to the beach", null);
+                "take a coin and go to the beach", -1);
         Place Start = new Place(0, "Start", "Go to the IDC"
                 , "Go to the Entrepreneurship Building", riddle0.getId(), chest.getId(), ll);
         Place IDC = new Place(1, "IDC", "Look for the cookies. "
@@ -57,13 +56,13 @@ public class main {
 
     }
 
-    boolean answerRiddle(Riddle riddle, String answer, ArrayList<Place> places){
+    boolean answerRiddle(Riddle riddle, String answer, ArrayList<Place> places, ArrayList<Item> items){
         if(riddle.tryAnswer(answer))
         {
             System.out.println(riddle.getTxtReward());
-            if(riddle.getItemReward() != null){
-                System.out.println("You got a " + riddle.getItemReward());
-                riddle.getItemReward().revealItem();
+            if(riddle.getItemRewardId() != -1){
+                System.out.println("You got a " + items.get(riddle.getItemRewardId()).getName());
+                items.get(riddle.getItemRewardId()).revealItem();
             }
             if(riddle.getPlaceReward() != -1){
                 System.out.println("You can go to " + riddle.getPlaceReward());
@@ -76,7 +75,7 @@ public class main {
     }
 
     boolean useItem(Item active, Item passive, ArrayList<Item> items, ArrayList<Place> places){
-        if(passive.getInteration(active)){
+        if(passive.getInteration(active.getId())){
             System.out.println(passive.getTxtReward());
             if(passive.getItemRewardId() != -1){
                 System.out.println("You got a " + items.get(passive.getItemRewardId()).getName());
@@ -106,7 +105,7 @@ public class main {
                     input = reader.nextLine();
                     Item active = findItem(input, items);
                     if(active != null){
-                        if(passive.getInteration(active)){
+                        if(passive.getInteration(active.getId())){
                             System.out.println(passive.getTxtReward());
                             if(items.get(passive.getId()).getItemRewardId() != -1){
                                 System.out.println("You got a " +
@@ -128,7 +127,7 @@ public class main {
             System.out.println("You got a ");
             input = reader.nextLine();
             while (true){
-                if(answerRiddle(riddles.get(place.getRiddleId()), input, places)){
+                if(answerRiddle(riddles.get(place.getRiddleId()), input, places, items)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {
@@ -141,7 +140,7 @@ public class main {
             System.out.println("Would you like to answer the riddle, y/n?");
             input = reader.nextLine();
             while (input.equals("y")){
-                if(answerRiddle(riddles.get(place.getRiddleId()), input, places)){
+                if(answerRiddle(riddles.get(place.getRiddleId()), input, places, items)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {

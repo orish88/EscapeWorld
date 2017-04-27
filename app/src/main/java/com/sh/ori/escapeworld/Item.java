@@ -12,7 +12,7 @@ public class Item {
     private int itemRewardId;
     private int placeRewardId;
     private String txtReward;
-    private Item reactItem;
+    private int reactItemId;
     private boolean revealed;
     private boolean passive;
 
@@ -24,17 +24,17 @@ public class Item {
      * @param itemRewardId itemReward
      * @param placeRewardId placeReward
      * @param txtReward txtReward
-     * @param reactItem reactItem
+     * @param reactItemId reactItem
      */
     public Item(int id, String name, String description, int itemRewardId,
-                int placeRewardId, String txtReward, Item reactItem) {
+                int placeRewardId, String txtReward, int reactItemId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.itemRewardId = itemRewardId;
         this.placeRewardId = placeRewardId;
         this.txtReward = txtReward;
-        this.reactItem = reactItem;
+        this.reactItemId = reactItemId;
         this.revealed = false;
         this.passive = true;
     }
@@ -68,11 +68,11 @@ public class Item {
 
     /**
      * Attempts to use and item on another one
-     * @param item the active item
+     * @param itemId the active item
      * @return duh
      */
-    public boolean getInteration(Item item) {
-        return this.reactItem.equals(item);
+    public boolean getInteration(int itemId) {
+        return this.reactItemId == itemId;
     }
 
     public boolean equals(Item item){
