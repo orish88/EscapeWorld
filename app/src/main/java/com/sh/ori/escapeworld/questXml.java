@@ -2,6 +2,7 @@ package com.sh.ori.escapeworld;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 public class questXml extends AppCompatActivity {
 
@@ -9,5 +10,9 @@ public class questXml extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest_xml);
+        Toolbar gameToolbar = (Toolbar) findViewById(R.id.tb_joinMap);
+        setSupportActionBar(gameToolbar);
+        gameToolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        gameToolbar.setTitle("");
     }
 }
