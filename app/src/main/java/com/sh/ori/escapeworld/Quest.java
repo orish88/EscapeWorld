@@ -1,77 +1,44 @@
 package com.sh.ori.escapeworld;
 
-import java.util.ArrayList;
 
 /**
- * Created by Ori on 4/27/2017.
+ * A Quest has a list of places that the player can visit. The player can only see revealed locations. At
+ * the beginning of the Quest, only the first location is revealed.
  */
-
 public class Quest {
 
+    private int id;
+    private String name;
+    private String description;
+    private Place[] places;
+    private Item[] items;
 
-    protected static int idGen = 400000;
-    int id;
-    Box firstBox;
-    ArrayList<Box> boxes;
-    ArrayList<Item> inventory;
-    //todo: quest log?
-    String introTxt;
-
-    public Quest(ArrayList<Box> boxes, ArrayList<Item> inventory, String introTxt, String exitText, Box firstBox) {
-        this.boxes = boxes;
-        this.inventory = inventory;
-        this.introTxt = introTxt;
-        this.exitText = exitText;
-        this.firstBox = firstBox;
+    public Quest(int id, String name, String description, Place[] places, Item[] items) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.places = places;
+        this.places[0].revealLoc();
+        this.items = items;
     }
-
-    String exitText;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public Box getFirstBox() {
-        return firstBox;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFirstBox(Box firstBox) {
-        this.firstBox = firstBox;
+    public Place getPlace(int i) {
+        return places[i];
     }
 
-    public ArrayList<Box> getBoxes() {
-        return boxes;
-    }
-
-    public void setBoxes(ArrayList<Box> boxes) {
-        this.boxes = boxes;
-    }
-
-    public ArrayList<Item> getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(ArrayList<Item> inventory) {
-        this.inventory = inventory;
-    }
-
-    public String getIntroTxt() {
-        return introTxt;
-    }
-
-    public void setIntroTxt(String introTxt) {
-        this.introTxt = introTxt;
-    }
-
-    public String getExitText() {
-        return exitText;
-    }
-
-    public void setExitText(String exitText) {
-        this.exitText = exitText;
+    public Item getItems(int i) {
+        return items[i];
     }
 }

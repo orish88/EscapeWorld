@@ -8,8 +8,5 @@ import java.util.ArrayList;
 
 public class Player {
 
-    ArrayList<Quest> favoriteBoxes;
-    ArrayList<Quest> selfCreatedBoxes;
-
 
 }
