@@ -4,17 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_launcher"
+    android:background="@mipmap/bg"
     tools:context="com.sh.ori.escapeworld.SignupActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bt_Rsend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:textColor="#ffffff"
+        android:textColor="#888888"
         android:background="@drawable/mybutton"
-        android:text="Button"
+        android:text="OK"
         tools:layout_editor_absoluteX="156dp"
         tools:layout_editor_absoluteY="395dp" />
+
+    <EditText
+        android:id="@+id/et_Runame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="User Name"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="122dp" />
+
+    <EditText
+        android:id="@+id/et_Rpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <EditText
+        android:id="@+id/Rmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email address"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="183dp" />
 </android.support.constraint.ConstraintLayout>
