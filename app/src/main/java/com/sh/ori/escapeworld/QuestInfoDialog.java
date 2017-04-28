@@ -1,5 +1,6 @@
 package com.sh.ori.escapeworld;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,8 +33,11 @@ public class QuestInfoDialog extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //todo: start game activity
-//                startActivity();
                 Toast.makeText(getApplicationContext(),"start playing: "+curQuest.getName() , Toast.LENGTH_SHORT).show();
+                Intent gameplayAct = new Intent(getApplicationContext(),GameplayActivity.class);
+                gameplayAct.putExtra("questID",curQuest.getId());
+                startActivity(gameplayAct);
+
             }
         });
 

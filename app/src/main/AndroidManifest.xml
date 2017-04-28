@@ -43,8 +43,11 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".StatusGames" />
         <activity android:name=".questXml" />
-        <activity android:name=".QuestInfoDialog"  ></activity>
-        <activity android:name=".Game"></activity>
+        <activity android:name=".QuestInfoDialog" />
+        <activity android:name=".Game" />
+        <activity
+            android:name=".GameplayActivity"
+            android:label="@string/title_activity_gameplay"></activity>
     </application>
 
 </manifest>
