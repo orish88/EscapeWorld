@@ -39,10 +39,10 @@
             android:label="@string/title_activity_quest_find" />
         <activity android:name=".loginActivity" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".CreateQuestActivity"></activity>
+        <activity android:name=".CreateQuestActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".StatusGames" />
-        <activity android:name=".questXml"></activity>
+        <activity android:name=".Game"></activity>
     </application>
 
 </manifest>

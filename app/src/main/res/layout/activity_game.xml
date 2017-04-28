@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sh.ori.escapeworld.Game">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_joinMap"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffcc00"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="436dp" >
+
+        <Button
+            android:id="@+id/bt_GameTB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="ToolBox"
+            android:textColor="#888888"
+            android:background="@drawable/mybutton"
+            android:drawableLeft="@drawable/ic_action_toolbox"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="left|center"
+            />
+
+        <Button
+            android:id="@+id/bt_GamePuzzle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Riddles"
+            android:textColor="#888888"
+            android:background="@drawable/mybutton"
+            android:drawableLeft="@drawable/ic_action_puzzle"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="right|center"
+            />
+    </android.support.v7.widget.Toolbar>
+
+</android.support.constraint.ConstraintLayout>
