@@ -8,6 +8,18 @@
     android:tileMode="disabled" android:gravity="top"
     tools:context="com.sh.ori.escapeworld.SignupActivity">
 
+    <TextView
+        android:id="@+id/tv_title_signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:text="Register Forum"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="34dp" />
+
     <Button
         android:id="@+id/bt_Rsend"
         android:layout_width="wrap_content"
@@ -16,8 +28,8 @@
         android:textColor="#888888"
         android:background="@drawable/mybutton"
         android:text="OK"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="395dp" />
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="327dp" />
 
     <EditText
         android:id="@+id/et_Runame"

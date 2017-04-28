@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sh.ori.escapeworld.newStageActivity"
+    android:background="@drawable/bg">
+
+
+    <TextView
+        android:id="@+id/tv_title_statusGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:text="    Welcome to the game.
+               Have fun!"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="32dp" />
+
+    <TextView
+        android:id="@+id/tv_title_statusGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:text="    Welcome to the game
+               Have fun!"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="32dp" />
+
+    <Button
+        android:id="@+id/bt_showRiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="left|center"
+        android:layout_marginEnd="96dp"
+        android:background="@drawable/mybutton"
+        android:drawableLeft="@drawable/ic_action_puzzle"
+        android:text="Show The Riddle "
+        android:textColor="#888888"
+        android:layout_weight="1"
+        tools:layout_editor_absoluteY="189dp"
+        tools:layout_editor_absoluteX="114dp" />
+
+    <Button
+        android:id="@+id/bt_showInventory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mybutton"
+        android:drawableLeft="@drawable/ic_action_toolbox"
+        android:text="Search for items "
+        android:textColor="#888888"
+        android:layout_weight="1"
+        tools:layout_editor_absoluteY="272dp"
+        tools:layout_editor_absoluteX="111dp" />
+
+
+    <Button
+        android:id="@+id/bt_privateGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/mybutton"
+        android:text="map"
+        android:textColor="#888888"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="359dp" />
+
+
+</android.support.constraint.ConstraintLayout>

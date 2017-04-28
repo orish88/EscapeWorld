@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AndroidAppUri;
@@ -30,6 +31,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+
+public class GameplayActivity extends FragmentActivity implements OnMapReadyCallback {
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameplayActivity extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
@@ -37,7 +41,8 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
 
     private static final int RADIUS = 10;
     private GoogleMap mMap;
-
+    private Button inventoryBt;
+    public ArrayList<Item> itemsList;
     public Quest curQuest;
     GoogleApiClient mGoogleApiClient;
     ArrayList<Geofence> mGeofenceList;
@@ -68,6 +73,15 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
                 // Set the request ID of the geofence. This is a string to identify this
                 // geofence.
                 .setRequestId(""+curQuest.getPlace(0).getId())
+        curQuest= Player.savedQuests.get(getIntent().getIntExtra("questID",-1));
+        itemsList
+        inventoryBt = (Button) findViewById(R.id.bt_InvernoryTB);
+        inventoryBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn.setVisibility(View.VISIBLE);
+            }
+        });
 
                 .setCircularRegion(
                         curQuest.getPlace(0).getLocation().latitude,
@@ -107,7 +121,9 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
 // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(mGoogleApiClient, getIndexApiAction());
     }
+    }
 
+    public void on
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

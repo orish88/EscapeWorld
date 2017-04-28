@@ -57,6 +57,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".AnswerRiddlesActivity"></activity>
+            android:label="@string/title_activity_gameplay" />
+        <activity android:name=".PrivateGame" />
+        <activity android:name=".newStageActivity"></activity>
     </application>
 
 </manifest>

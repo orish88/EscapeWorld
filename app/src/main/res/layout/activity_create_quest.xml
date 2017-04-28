@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_find_quest"
     android:layout_width="match_parent"
@@ -8,13 +9,71 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sh.ori.escapeworld.CreateQuestActivity">
+    tools:context="com.sh.ori.escapeworld.CreateQuestActivity"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:theme="@style/AppTheme">
 
-    <com.google.android.gms.maps.MapFragment
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/game_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="419dp"
+        tools:context="com.sh.ori.escapeworld.GameplayActivity" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_joinMap"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp"
-        android:id="@+id/mf_find_quest" />
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#ffcc00"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="436dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/bt_InvernoryTB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_weight="1"
+                android:background="@drawable/mybutton"
+                android:text="New Item"
+                android:textColor="#888888"
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="36dp"
+                android:layout_marginStart="36dp" />
+
+            <Button
+                android:id="@+id/bt_GamePuzzle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right|center"
+                android:layout_marginEnd="34dp"
+                android:layout_marginRight="34dp"
+                android:layout_weight="1"
+                android:background="@drawable/mybutton"
+                android:text="New Riddle"
+                android:textColor="#888888" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/inventory_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>
