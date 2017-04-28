@@ -13,19 +13,19 @@ public class Place implements Serializable{
     private String name;
     private String enterDescription;
     private String exitDescription;
-    private int riddleId;
+    private Riddle riddle;
     private int itemId;
     private boolean revealed;
     private LatLng location;
 
 
     public Place(int id, String name, String enterDescription, String exitDescription,
-                 int riddleId, int itemId, LatLng location) {
+                 Riddle riddle, int itemId, LatLng location) {
         this.id = id;
         this.name = name;
         this.enterDescription = enterDescription;
         this.exitDescription = exitDescription;
-        this.riddleId = riddleId;
+        this.riddle = riddle;
         this.itemId = itemId;
         this.revealed = false;
         this.location = location;
@@ -60,8 +60,8 @@ public class Place implements Serializable{
         return exitDescription;
     }
 
-    public int getRiddleId() {
-        return riddleId;
+    public Riddle getRiddle() {
+        return riddle;
     }
 
     public int getItemId() {

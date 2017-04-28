@@ -31,6 +31,15 @@ public class Quest implements Serializable {
 
 //    protected Quest(Parcel in) {
 //        id = in.readInt();
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public ArrayList<Place> getPlaces() {
+
+        return places;
+    }
 //        name = in.readString();
 //        description = in.readString();
 //    }

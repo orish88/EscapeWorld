@@ -130,7 +130,7 @@ public class main {
             System.out.println("You got a ");
             input = reader.nextLine();
             while (true){
-                if(answerRiddle(riddles.get(place.getRiddleId()), input, places, items)){
+                if(answerRiddle(riddles.get(place.getRiddle()), input, places, items)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {
@@ -139,11 +139,11 @@ public class main {
             }
         }
 
-        if(place.getRiddleId() != -1){
+        if(place.getRiddle() != -1){
             System.out.println("Would you like to answer the riddle, y/n?");
             input = reader.nextLine();
             while (input.equals("y")){
-                if(answerRiddle(riddles.get(place.getRiddleId()), input, places, items)){
+                if(answerRiddle(riddles.get(place.getRiddle()), input, places, items)){
                     System.out.println(place.getExitDescriptionescription());
                     break;
                 } else {

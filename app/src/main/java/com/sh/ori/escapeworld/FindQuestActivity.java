@@ -1,6 +1,7 @@
 package com.sh.ori.escapeworld;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -69,7 +71,8 @@ public class FindQuestActivity extends FragmentActivity implements OnMapReadyCal
     }
 
     public void addQuestMarker(Quest quest){
-        Marker curMark = mMap.addMarker(new MarkerOptions().position(quest.getPlace(0).getLocation()).title(quest.getName()));
+        Marker curMark = mMap.addMarker(new MarkerOptions().position(quest.getPlace(0).getLocation()).title(quest.getName())
+                .icon(BitmapDescriptorFactory.fromBitmap( BitmapFactory.decodeResource(getResources(), R.drawable.hiking32))));
         curMark.setTag(quest);
     }
 }
