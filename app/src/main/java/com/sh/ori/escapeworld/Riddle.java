@@ -1,11 +1,13 @@
 package com.sh.ori.escapeworld;
 
 
+import java.io.Serializable;
+
 /**
  * This represents a riddle. You can try to answer the riddle. If you successfully answer the riddle then
  * the main should request the xReward.
  */
-public class Riddle {
+public class Riddle implements Serializable {
     private int id;
     private String name;
     private String description;

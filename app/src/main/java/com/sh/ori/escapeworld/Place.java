@@ -3,10 +3,12 @@ package com.sh.ori.escapeworld;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
+
 /**
  * A place on the map. Every place has a riddle and an item.
  */
-public class Place {
+public class Place implements Serializable{
     private int id;
     private String name;
     private String enterDescription;

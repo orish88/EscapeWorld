@@ -42,6 +42,8 @@
         <activity android:name=".CreateQuestActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".StatusGames" />
+        <activity android:name=".questXml" />
+        <activity android:name=".QuestInfoDialog"  ></activity>
         <activity android:name=".Game"></activity>
     </application>
 

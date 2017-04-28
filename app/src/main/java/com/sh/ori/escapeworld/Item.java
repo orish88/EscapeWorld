@@ -1,11 +1,13 @@
 package com.sh.ori.escapeworld;
 
 
+import java.io.Serializable;
+
 /**
  * This represents an item. Items have descriptions and can be used with other items. Some items can
  * actively be used and others can be used. Upon successfully being used, the main should request xReward.
  */
-public class Item {
+public class Item implements Serializable {
     private int id;
     private String name;
     private String description;

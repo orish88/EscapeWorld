@@ -28,15 +28,15 @@ public class Game extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if(id == R.id.action_refresh){
-            Toast.makeText(MainActivity.this, "Refresh App", Toast.LENGTH_LONG).show();
-        }
-        if(id == R.id.action_new){
-            Toast.makeText(MainActivity.this, "Create Text", Toast.LENGTH_LONG).show();
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        if(id == R.id.action_refresh){
+//            Toast.makeText(getApplicationContext(), "Refresh App", Toast.LENGTH_LONG).show();
+//        }
+//        if(id == R.id.action_new){
+//            Toast.makeText(getApplicationContext(), "Create Text", Toast.LENGTH_LONG).show();
+//        }
         return super.onOptionsItemSelected(item);
     }
 }
