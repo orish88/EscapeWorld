@@ -3,14 +3,14 @@ package com.sh.ori.escapeworld;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.sh.ori.escapeworld.GameObjects.Player;
+import com.sh.ori.escapeworld.GameObjects.Quest;
 
 public class QuestInfoDialog extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class QuestInfoDialog extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest_info_dialog);
-        curQuest = Player.savedQuests.get(getIntent().getIntExtra("quest",-1));
+        curQuest = Player.curQuest;
         tvTitle = (TextView) findViewById(R.id.tv_dialog_quest_title);
         tvTitle.setText("Title: "+ curQuest.getName());
         tvDescription = (TextView) findViewById(R.id.tv_dialog_quest_description);
@@ -35,9 +35,8 @@ public class QuestInfoDialog extends AppCompatActivity {
                 //todo: start game activity
                 Toast.makeText(getApplicationContext(),"start playing: "+curQuest.getName() , Toast.LENGTH_SHORT).show();
                 Intent gameplayAct = new Intent(getApplicationContext(),GameplayActivity.class);
-                gameplayAct.putExtra("questID",curQuest.getId());
+//                gameplayAct.putExtra("questID",curQuest.getId());
                 startActivity(gameplayAct);
-
             }
         });
 

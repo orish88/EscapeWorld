@@ -1,7 +1,9 @@
 package com.sh.ori.escapeworld;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sh.ori.escapeworld.GameObjects.Player;
+import com.sh.ori.escapeworld.GameObjects.Quest;
 
 import java.util.ArrayList;
 
@@ -30,7 +34,7 @@ public class FindQuestActivity extends FragmentActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        Player.addQuests();
+        Player.loadSavedQuests();
         quests = Player.savedQuests;
     }
 
@@ -48,30 +52,41 @@ public class FindQuestActivity extends FragmentActivity implements OnMapReadyCal
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        LatLng sydney2 = new LatLng(-34, 152);
-
+//        LatLng sydney = new LatLng(-34, 151);
+//        LatLng sydney2 = new LatLng(-34, 152);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Quest curQuest = (Quest) marker.getTag();
                 Intent questDialogAct = new Intent(getApplicationContext(),QuestInfoDialog.class);
-                questDialogAct.putExtra("quest",curQuest.getId());
+//                questDialogAct.putExtra("quest",curQuest.getId());
+                Player.curQuest = curQuest;
                 Log.d("notes","before quest dialog: "+curQuest.getName());
                 startActivity(questDialogAct);
                 return false;
-
             }
         });
 
         for(Quest q: quests) {
             addQuestMarker(q);
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(q.getPlace(0).getLocation()));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(q.getPlaces().get(0).getLocation()));
         }
     }
 
     public void addQuestMarker(Quest quest){
-        Marker curMark = mMap.addMarker(new MarkerOptions().position(quest.getPlace(0).getLocation()).title(quest.getName())
+        Marker curMark = mMap.addMarker(new MarkerOptions().position(quest.getPlaces().get(0).getLocation()).title(quest.getName())
                 .icon(BitmapDescriptorFactory.fromBitmap( BitmapFactory.decodeResource(getResources(), R.drawable.hiking32))));
         curMark.setTag(quest);
     }

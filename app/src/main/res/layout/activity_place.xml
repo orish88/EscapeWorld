@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sh.ori.escapeworld.AnswerRiddlesActivity">
+    android:background="@drawable/bg"
+    tools:context="com.sh.ori.escapeworld.PlaceActivity">
 
     <TextView
         android:text="question?"
@@ -70,4 +71,13 @@
         android:layout_alignTop="@+id/img_bt_right"
         android:layout_alignLeft="@+id/bt_submit_answer"
         android:layout_alignStart="@+id/bt_submit_answer" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/checkbox_on_background"
+        android:layout_below="@+id/img_bt_right"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:id="@+id/imv_answered_mark" />
 </RelativeLayout>

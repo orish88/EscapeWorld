@@ -21,6 +21,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -40,26 +41,26 @@
         <activity android:name=".loginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".CreateQuestActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".StatusGames" />
-        <activity android:name=".questXml" />
         <activity android:name=".QuestInfoDialog" />
-        <activity android:name=".Game" />
         <activity
             android:name=".GameplayActivity"
-            android:label="@string/title_activity_gameplay" />
+            android:label="@string/title_activity_gameplay"
+            >
+            <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+        </activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".AnswerRiddlesActivity"></activity>
-            android:label="@string/title_activity_gameplay" />
-        <activity android:name=".PrivateGame" />
-        <activity android:name=".newStageActivity"></activity>
+
+        <activity android:name=".PlaceActivity" />
+        android:label="@string/title_activity_gameplay" />
+        <service
+            android:name=".GeofenceTransitionsIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

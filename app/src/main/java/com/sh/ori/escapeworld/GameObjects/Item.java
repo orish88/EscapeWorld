@@ -1,4 +1,4 @@
-package com.sh.ori.escapeworld;
+package com.sh.ori.escapeworld.GameObjects;
 
 
 import java.io.Serializable;

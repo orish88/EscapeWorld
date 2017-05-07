@@ -22,7 +22,8 @@
         tools:layout_editor_absoluteX="141dp"
         android:layout_above="@+id/bt_create_quest"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="107dp" />
+        android:layout_marginBottom="107dp"
+        />
 
     <Button
         android:id="@+id/bt_create_quest"
