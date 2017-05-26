@@ -38,12 +38,10 @@ public class Player {
 //        LatLng ll2 = new LatLng(31.768815, 35.198452);
 //        LatLng ll3 = new LatLng(31.768649, 35.198613);
 
-
         LatLng ll0 = new LatLng(31.756890, 35.176645);
-
-        LatLng ll1 = new LatLng(31.756798, 35.176387);
+        LatLng ll1 = new LatLng(31.768968, 35.198646);
         LatLng ll2 = new LatLng(31.768815, 35.198452);
-        LatLng ll3 = new LatLng(31.768649, 35.198613);
+        LatLng ll3 = new LatLng(31.756798, 35.176387);
 
         ArrayList<String> answerList0 = new ArrayList<String>();
         answerList0.add("answer0");

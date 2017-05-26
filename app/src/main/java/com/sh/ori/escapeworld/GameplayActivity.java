@@ -56,12 +56,12 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
     //    public Quest curQuest;
     GoogleApiClient mGoogleApiClient;
     ArrayList<Geofence> mGeofenceList;
+    ArrayList<Marker> mMarkers;
     PendingIntent mGeofencePendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("notes", "GameplayActivity: on create called");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -83,14 +83,15 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
         mGeofenceList = new ArrayList<Geofence>();
         //set the geofence for first place
         populateGeofenceList();
-
-        LocalBroadcastManager lbc = LocalBroadcastManager.getInstance(this);
-        GoogleReceiver googleReceiver = new GoogleReceiver(this);
-        lbc.registerReceiver(googleReceiver, new IntentFilter("googlegeofence"));
-
-
+//        LocalBroadcastManager lbc = LocalBroadcastManager.getInstance(this);
+//        GoogleReceiver googleReceiver = new GoogleReceiver(this,mMap);
+//        lbc.registerReceiver(googleReceiver, new IntentFilter("googlegeofence"));
     }
 
+
+    /**
+     * create the geogence objects for every place  in the quest, add thm to list to be added
+     */
     private void populateGeofenceList() {
         Geofence firstGeofence = new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
@@ -104,9 +105,7 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
                         Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build();
-
         mGeofenceList.add(firstGeofence);
-
     }
 
     private GeofencingRequest getGeofencingRequest() {
@@ -174,8 +173,6 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
         AppIndex.AppIndexApi.end(mGoogleApiClient, getIndexApiAction());
     }
 
-    //
-//    public void on
 //    /**
 //     * Manipulates the map once available.
 //     * This callback is triggered when the map is ready to be used.
@@ -220,6 +217,9 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
                 return false;
             }
         });
+        LocalBroadcastManager lbc = LocalBroadcastManager.getInstance(this);
+        GoogleReceiver googleReceiver = new GoogleReceiver(this,mMap);
+        lbc.registerReceiver(googleReceiver, new IntentFilter("googlegeofence"));
     }
 
     public void addPlaceMarker(Place place) {
@@ -227,6 +227,10 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
             Log.d("notes", "place revealed: " + place.getTitle());
             Marker curMark = mMap.addMarker(new MarkerOptions().position(place.getLocation()).title(place.getTitle()).icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.puzzle))));
             curMark.setTag(place.getId());
+            if(mMarkers == null){
+                mMarkers = new ArrayList<Marker>();
+            }
+            mMarkers.add(curMark);
         }
     }
 
@@ -300,9 +304,10 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
     static class GoogleReceiver extends BroadcastReceiver {
 
         GameplayActivity mActivity;
-
-        public GoogleReceiver(Activity activity) {
+        GoogleMap mMap;
+        public GoogleReceiver(Activity activity,GoogleMap gMap) {
             mActivity = (GameplayActivity) activity;
+            mMap = gMap;
         }
 
         @Override
@@ -310,11 +315,28 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
             //Handle the intent here
 
             Log.d("notes","On Receive: receiver called");
-            int curPlaceId = intent.getIntExtra("placeID",-1);
-            Intent ansAct = new Intent(context, PlaceActivity.class);
-            Log.d("notes", "place id:" + curPlaceId);
-            ansAct.putExtra("placeID", curPlaceId);
-            mActivity.startActivity(ansAct);
+            ArrayList<String> placeIDs = intent.getStringArrayListExtra("placeIDs");
+            Log.d("notes","received place ids: "+placeIDs.toString());
+//            Intent ansAct = new Intent(context, PlaceActivity.class);
+//            Log.d("notes", "place id:" + curPlaceId);
+//            ansAct.putExtra("placeID", curPlaceId);
+//            mActivity.startActivity(ansAct);
+
+            //todo: change the colors of the markers
+            if(mMap != null){
+                Log.d("notes","received place ids- map isnt null: "+placeIDs.toString());
+
+
+                for(Marker marker :mActivity.mMarkers) {
+                    Log.d("notes","marker tag:  "+marker.getTag());
+                    if(placeIDs.contains( ""+marker.getTag() )) {
+                        marker.setIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.puzzle_green)));
+                        Log.d("notes", "marker icon changed applied: "+marker.getTag());
+                    }
+                }
+            }
+
+
         }
     }
 

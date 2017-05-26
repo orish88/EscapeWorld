@@ -9,18 +9,15 @@ import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.games.Game;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
 import com.sh.ori.escapeworld.GameObjects.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -105,12 +102,12 @@ public class GeofenceTransitionsIntentService extends IntentService {
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
         // Test that the reported transition was of interest.
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
-                geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
+        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ) {
+            //||geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT
 
             // Get the geofences that were triggered. A single event can trigger
             // multiple geofences.
-            List triggeringGeofences = geofencingEvent.getTriggeringGeofences();
+//            List triggeringGeofences = geofencingEvent.getTriggeringGeofences();
 
             // Get the transition details as a String.
 //            String geofenceTransitionDetails = getGeofenceTransitionDetails(
@@ -122,11 +119,12 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
             // Send notification and log the transition details.
             ArrayList<String> reqIds = getGeofenceTransitionDetails(geofencingEvent);
-            for(String reqID : reqIds){
-                sendNotification(reqID);
-                startPlaceActivity(reqID);
-                Log.i(TAG, reqIds.get(0));
-            }
+//            for(String reqID : reqIds){
+//                sendNotification(reqID);
+//                changePlacesToInRangeIcon(reqID);
+//                Log.i(TAG, reqIds.get(0));
+//            }
+            changePlacesToInRangeIcon(reqIds);
         } else {
             // Log the error.
             Log.e(TAG, "geofence_transition_invalid_type: "+ geofenceTransition);
@@ -134,23 +132,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
     }
 
-//    /**
-//     * Handle action Foo in the provided background thread with the provided
-//     * parameters.
-//     */
-//    private void handleActionFoo(String param1, String param2) {
-//        // TODO: Handle action Foo
-//        throw new UnsupportedOperationException("Not yet implemented");
-//    }
-//
-//    /**
-//     * Handle action Baz in the provided background thread with the provided
-//     * parameters.
-//     */
-//    private void handleActionBaz(String param1, String param2) {
-//        // TODO: Handle action Baz
-//        throw new UnsupportedOperationException("Not yet implemented");
-//    }
 
 
     //added funcs
@@ -161,7 +142,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
         ArrayList triggeringIDs = new ArrayList();
         for (Geofence geofence : event.getTriggeringGeofences()) {
             Log.d(TAG, "on geo details- geo: "+geofence.getRequestId());
-            triggeringIDs.add(geofence.getRequestId());
+            triggeringIDs.add(geofence.getRequestId()); //because the request id == placeID the geofence represents
         }
 //        return String.format("%s: %s", transitionString, TextUtils.join(", ", triggeringIDs));
         return triggeringIDs;
@@ -199,12 +180,12 @@ public class GeofenceTransitionsIntentService extends IntentService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, builder.build());
     }
-    public void startPlaceActivity(String requestId){
+    public void changePlacesToInRangeIcon(ArrayList<String> reqIds){
 //        Intent placeAct = new Intent(getApplicationContext(), PlaceActivity.class);
 //        placeAct.putExtra("placeID",Integer.parseInt(requestId));
 //        startActivity(placeAct);
         Intent lbcIntent = new Intent("googlegeofence"); //Send to any reciever listening for this
-        lbcIntent.putExtra("placeID", Integer.parseInt(requestId));  //Put whatever it is you want the activity to handle
-        LocalBroadcastManager.getInstance(this).sendBroadcast(lbcIntent);  //Send the inten
+        lbcIntent.putExtra("placeIDs", reqIds);  //Put whatever it is you want the activity to handle
+        LocalBroadcastManager.getInstance(this).sendBroadcast(lbcIntent);  //Send the intent
     }
 }
