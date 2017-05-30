@@ -82,30 +82,55 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
         }
         mGeofenceList = new ArrayList<Geofence>();
         //set the geofence for first place
-        populateGeofenceList();
+//        populateGeofenceList();
 //        LocalBroadcastManager lbc = LocalBroadcastManager.getInstance(this);
 //        GoogleReceiver googleReceiver = new GoogleReceiver(this,mMap);
 //        lbc.registerReceiver(googleReceiver, new IntentFilter("googlegeofence"));
     }
 
-
     /**
      * create the geogence objects for every place  in the quest, add thm to list to be added
      */
     private void populateGeofenceList() {
-        Geofence firstGeofence = new Geofence.Builder()
+//        Geofence firstGeofence = new Geofence.Builder()
+//                // Set the request ID of the geofence. This is a string to identify this
+//                // geofence.
+//                .setRequestId("" + Player.curQuest.getPlaces().get(0).getId()).setCircularRegion(
+//                        Player.curQuest.getPlaces().get(0).getLocation().latitude,
+//                        Player.curQuest.getPlaces().get(0).getLocation().longitude,
+//                        RADIUS
+//                )
+//                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+//                        Geofence.GEOFENCE_TRANSITION_EXIT)
+//                .build();
+     for(Marker marker: mMarkers) {
+         if(Player.getPlaceFromID((int)marker.getTag()).isRevealed()) {
+             mGeofenceList.add(createGeofenceForPlace((int) marker.getTag()));
+         }
+     }
+    }
+
+    private Geofence createGeofenceForPlace(int placeID){
+        Place curPlace = Player.getPlaceFromID(placeID);
+        if(curPlace == null){
+            Log.d("notes","create geofence: cur place is NULL");
+            return null;
+        }
+
+        Geofence newGeofence = new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
                 // geofence.
-                .setRequestId("" + Player.curQuest.getPlaces().get(0).getId()).setCircularRegion(
-                        Player.curQuest.getPlaces().get(0).getLocation().latitude,
-                        Player.curQuest.getPlaces().get(0).getLocation().longitude,
+                .setRequestId("" + curPlace.getId()).setCircularRegion(
+                        curPlace.getLocation().latitude,
+                        curPlace.getLocation().longitude,
                         RADIUS
                 )
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-                        Geofence.GEOFENCE_TRANSITION_EXIT)
+                        Geofence.GEOFENCE_TRANSITION_EXIT | Geofence.GEOFENCE_TRANSITION_DWELL ).setLoiteringDelay(3000)
                 .build();
-        mGeofenceList.add(firstGeofence);
+        return newGeofence;
     }
 
     private GeofencingRequest getGeofencingRequest() {
@@ -114,7 +139,6 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
         builder.addGeofences(mGeofenceList);
         return builder.build();
     }
-
 
     private PendingIntent getGeofencePendingIntent() {
         // Reuse the PendingIntent if we already have it.
@@ -149,9 +173,10 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
         super.onResume();
         Log.d("notes", "GameplayActivity: on resume called");
         if (mMap != null) {
-            for (Place p : Player.curQuest.getPlaces()) {
-                addPlaceMarker(p);
-            }
+//            for (Place p : Player.getCurQuestPlaces()) {
+//                addPlaceMarker(p);
+//            }
+            populateGeofenceList();
         }
     }
 
@@ -185,7 +210,6 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Log.d("notes", "GameplayActivity: on map ready called");
-
         mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -198,10 +222,9 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
             return;
         }
         mMap.setMyLocationEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Player.curQuest.getPlaces().get(0).getLocation()));
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(Player.getCurQuestPlaces().get(0).getLocation()));
         // Add a marker in Sydney and move the camera
-        for (Place p : Player.curQuest.getPlaces()) {
+        for (Place p : Player.getCurQuestPlaces()) {
             addPlaceMarker(p);
         }
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -209,14 +232,17 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
             public boolean onMarkerClick(Marker marker) {
                 int curPlaceId = (int) marker.getTag();
                 Intent ansAct = new Intent(getApplicationContext(), PlaceActivity.class);
-                Log.d("notes", "quest id:" + Player.curQuest.getId());
+                Log.d("notes", "quest id:" + Player.getCurQuestID());
                 Log.d("notes", "place id:" + curPlaceId);
 //                ansAct.putExtra("questID",Player.curQuest.getId());
-                ansAct.putExtra("placeID", curPlaceId);
-                startActivity(ansAct);
+                if(Player.getPlaceFromID(curPlaceId).isClickable()) {
+                    ansAct.putExtra("placeID", curPlaceId);
+                    startActivity(ansAct);
+                }
                 return false;
             }
         });
+        populateGeofenceList();
         LocalBroadcastManager lbc = LocalBroadcastManager.getInstance(this);
         GoogleReceiver googleReceiver = new GoogleReceiver(this,mMap);
         lbc.registerReceiver(googleReceiver, new IntentFilter("googlegeofence"));
@@ -233,7 +259,6 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
             mMarkers.add(curMark);
         }
     }
-
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.d("notes", "on connected called");
@@ -326,11 +351,14 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
             if(mMap != null){
                 Log.d("notes","received place ids- map isnt null: "+placeIDs.toString());
 
-
                 for(Marker marker :mActivity.mMarkers) {
+                    int placeID = (int) marker.getTag();
                     Log.d("notes","marker tag:  "+marker.getTag());
                     if(placeIDs.contains( ""+marker.getTag() )) {
+                        //todo: set the place with placeID to be openable only if in range (?)
                         marker.setIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.puzzle_green)));
+                        Place place = Player.getPlaceFromID(placeID);
+                        place.setClickable(true);
                         Log.d("notes", "marker icon changed applied: "+marker.getTag());
                     }
                 }
@@ -339,6 +367,7 @@ public class GameplayActivity extends FragmentActivity implements OnMapReadyCall
 
         }
     }
+
 
 }
 /*

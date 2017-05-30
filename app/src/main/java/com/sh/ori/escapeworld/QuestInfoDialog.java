@@ -23,7 +23,7 @@ public class QuestInfoDialog extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest_info_dialog);
-        curQuest = Player.curQuest;
+        curQuest = Player.getCurQuest();
         tvTitle = (TextView) findViewById(R.id.tv_dialog_quest_title);
         tvTitle.setText("Title: "+ curQuest.getName());
         tvDescription = (TextView) findViewById(R.id.tv_dialog_quest_description);

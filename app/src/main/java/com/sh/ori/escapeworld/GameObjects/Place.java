@@ -19,9 +19,19 @@ public class Place implements Serializable{
     private ArrayList<Riddle> riddles;
     private ArrayList<Item> items;
     private boolean revealed;
+
+    public boolean isClickable() {
+        return isClickable;
+    }
+
+    public void setClickable(boolean clickable) {
+        isClickable = clickable;
+    }
+
     private LatLng location;
     private ArrayList<Integer> itemRewardIds;
     private ArrayList<Integer> placeRewardIds;
+    private boolean isClickable;
 
     public Place(String title, String enterDescription, String exitDescription, ArrayList<Riddle> riddles, ArrayList<Item> items,
                  boolean revealed, LatLng location, ArrayList<Integer> itemRewardIds, ArrayList<Integer> placeRewardIds) {
@@ -35,6 +45,7 @@ public class Place implements Serializable{
         this.location = location;
         this.itemRewardIds = itemRewardIds;
         this.placeRewardIds = placeRewardIds;
+        this.isClickable = false;
     }
 
     public Place(String title, String enterDescription, String exitDescription,
@@ -116,23 +127,39 @@ public class Place implements Serializable{
         this.location = location;
     }
 
-    public void addPrizePlace(int idToAdd){
+    public void addRewardPlace(int idToAdd){
         if(this.placeRewardIds != null){
             this.placeRewardIds.add(idToAdd);
         }
     }
-    public void removePrizePlace(int idToAdd){
+    public void removeRewardPlace(int idToAdd){
         if(this.placeRewardIds != null){
             this.placeRewardIds.remove(idToAdd);
         }
     }
 
-    public void addPrizeItem(int idToAdd){
+    public ArrayList<Integer> getItemRewardIds() {
+        return itemRewardIds;
+    }
+
+    public void setItemRewardIds(ArrayList<Integer> itemRewardIds) {
+        this.itemRewardIds = itemRewardIds;
+    }
+
+    public ArrayList<Integer> getPlaceRewardIds() {
+        return placeRewardIds;
+    }
+
+    public void setPlaceRewardIds(ArrayList<Integer> placeRewardIds) {
+        this.placeRewardIds = placeRewardIds;
+    }
+
+    public void addRewardItem(int idToAdd){
         if(this.itemRewardIds != null){
             this.itemRewardIds.add(idToAdd);
         }
     }
-    public void removePrizeItem(int idToAdd){
+    public void removeRewardItem(int idToAdd){
         if(this.itemRewardIds != null){
             this.itemRewardIds.remove(idToAdd);
         }

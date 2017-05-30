@@ -102,9 +102,8 @@ public class GeofenceTransitionsIntentService extends IntentService {
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
         // Test that the reported transition was of interest.
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ) {
+        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER || geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL  ) { //todo: add linger
             //||geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT
-
             // Get the geofences that were triggered. A single event can trigger
             // multiple geofences.
 //            List triggeringGeofences = geofencingEvent.getTriggeringGeofences();
@@ -129,7 +128,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
             // Log the error.
             Log.e(TAG, "geofence_transition_invalid_type: "+ geofenceTransition);
         }
-
     }
 
 

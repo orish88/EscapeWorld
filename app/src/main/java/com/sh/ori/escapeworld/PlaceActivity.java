@@ -53,10 +53,6 @@ public class PlaceActivity extends AppCompatActivity implements View.OnClickList
         imBtRight = (ImageButton) findViewById(R.id.img_bt_right);
         imBtLeft.setOnClickListener(this);
         imBtRight.setOnClickListener(this);
-
-
-
-
     }
 
     public void setRiddleOnScreen(Riddle curRiddle){
@@ -77,16 +73,32 @@ public class PlaceActivity extends AppCompatActivity implements View.OnClickList
                 String userAnswer = etAnswer.getText().toString();
                 //todo: complete submit
                 if(curRiddle.tryAnswer(userAnswer)){
+                    Toast.makeText(getApplicationContext(), "Correct! Well done." ,Toast.LENGTH_SHORT).show();
                     curRiddle.setAnswered(true);
                     //todo: update the riddle in the global static cur quest
                     Player.saveRiddle(curPlace.getId(), curRiddle);
-                    //todo: add the case of several riddles on 1 reward
                     for(int newPlaceID : curRiddle.getPlaceRewardIds()){
                         Player.revealLoc(newPlaceID);
                     }
+                    //todo: add the case of several riddles on 1 reward
+                    boolean allRiddlesSolved = true;
+                    for ( Riddle riddle : Player.getPlaceFromID(placeID).getRiddles() ){
+                        if(!riddle.isAnswered()){
+                            allRiddlesSolved = false;
+                        }
+                    }
+                    if(allRiddlesSolved){
+                        for(int rewardPlaceId : Player.getPlaceFromID(placeID).getPlaceRewardIds()) {
+                            Player.revealLoc(rewardPlaceId);
+                        }
+                    }
                     //todo: handle reward items as well
                     setRiddleOnScreen(curRiddle);
+//                    imvAnsweredMark.setVisibility(View.VISIBLE);
                     curPlace = Player.getPlaceFromID(placeID);
+
+                }else{
+                    Toast.makeText(getApplicationContext(), "Wrong answer, try again!" ,Toast.LENGTH_SHORT).show();
                 }
                 break;
             case(R.id.img_bt_left):

@@ -13,10 +13,15 @@ import java.util.HashMap;
 
 public class Player {
 
-    public static Quest curQuest;
-    public static ArrayList<Quest> favoriteQuests = new ArrayList<Quest>();
-    public static ArrayList<Quest> savedQuests = new ArrayList<Quest>();
-    public static HashMap<Integer,Integer> currentGeofences = new HashMap<>();
+    private static Quest curQuest;
+    private static ArrayList<Quest> favoriteQuests = new ArrayList<Quest>();
+    private static ArrayList<Quest> savedQuests = new ArrayList<Quest>();
+    private static HashMap<Integer,Integer> currentGeofences = new HashMap<>();
+
+    public static Quest getCurQuest(){
+        return curQuest;
+    }
+
     public static void loadSavedQuests(){
 
 
@@ -92,6 +97,7 @@ public class Player {
         ArrayList<Place> places1 = new ArrayList<Place>();
         places1.add(p2);
         places1.add(p3);
+        places1.add(p1);
         Quest q1 = new Quest("Quest1", "Quest 1 bla bla bla bla",places1, new ArrayList<Item>(), new ArrayList<String>());
         savedQuests.add(q0);
         savedQuests.add(q1);
@@ -145,6 +151,18 @@ public class Player {
                 p.setRevealed(true);
             }
         }
+    }
+    public static ArrayList<Place> getCurQuestPlaces(){
+        return curQuest.getPlaces();
+    }
+    public static int getCurQuestID(){
+        return curQuest.getId();
+    }
+    public static void setCurQuest(Quest quest){
+        curQuest = quest;
+    }
+    public static ArrayList<Quest> getSavedQuests(){
+        return savedQuests;
     }
 
 //    //todo: delete(its for debug )

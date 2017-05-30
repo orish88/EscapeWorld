@@ -35,7 +35,7 @@ public class FindQuestActivity extends FragmentActivity implements OnMapReadyCal
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         Player.loadSavedQuests();
-        quests = Player.savedQuests;
+        quests = Player.getSavedQuests();
     }
 
 
@@ -72,7 +72,7 @@ public class FindQuestActivity extends FragmentActivity implements OnMapReadyCal
                 Quest curQuest = (Quest) marker.getTag();
                 Intent questDialogAct = new Intent(getApplicationContext(),QuestInfoDialog.class);
 //                questDialogAct.putExtra("quest",curQuest.getId());
-                Player.curQuest = curQuest;
+                Player.setCurQuest(curQuest);
                 Log.d("notes","before quest dialog: "+curQuest.getName());
                 startActivity(questDialogAct);
                 return false;
